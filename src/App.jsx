@@ -12,9 +12,9 @@ function Item(item) {
     <div
       onClick={toggle}
       className={`item ${item.done ? "done" : ""}`}
-      /* style={{ */
-      /*   pageTransitionTag: slug, */
-      /* }} */
+      style={{
+        pageTransitionTag: slug,
+      }}
     >
       <h1>{item.name}</h1>
     </div>
@@ -33,8 +33,7 @@ function App() {
   });
 
   function toggle(item) {
-    let items = Array.from(state.items);
-
+    const items = Array.from(state.items);
     const foundItem = items.find((maybeItem) => maybeItem.name === item.name);
     if (foundItem) {
       foundItem.done = !foundItem.done;
@@ -44,7 +43,7 @@ function App() {
       setState({
         items,
       });
-    })
+    });
   }
 
   function setValue(item, name) {
@@ -60,9 +59,20 @@ function App() {
     });
   }
 
+  const done = state.items.filter(({ done }) => done).length;
+  const todo = state.items.filter(({ done }) => !done).length;
+
   return (
     <div className="app">
-      <h1 className="app-heading">Hello meet.js</h1>
+      <div className="app-heading">
+        <h1>
+          todo list
+        </h1>
+        <div className="info">
+        <p>todo: {todo}</p>
+        <p>done: {done}</p>
+        </div>
+      </div>
 
       <div className="todo-col">
         {state.items

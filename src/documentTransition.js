@@ -1,13 +1,11 @@
 import { flushSync } from "react-dom";
 
 export const withTransition = async (callback) => {
-  const _document = document;
-
-  if (!_document.createDocumentTransition) {
+  if (!document.createDocumentTransition) {
     return callback();
   }
 
-  const transition = _document.createDocumentTransition();
+  const transition = document.createDocumentTransition();
 
   flushSync(() => void(0));
 
